@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+		<title>Simple icons</title>
+		<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#map {
+			height: 100%;
+		}
+		</style>
+	</head>
+  	<body>
+
+    <div style="width:540px; height:1220px" id="map"></div>
+
+ 	<script>
+
+    function initMap() {
+	    dracaryspolylines = [
+		[		//North east to West South
+			{"lat":39.105564,"lng":-94.583092},
+			{"lat":39.105594,"lng":-94.583096},
+			{"lat":39.105635,"lng":-94.583099},
+			{"lat":39.105704,"lng":-94.583121},
+			{"lat":39.10578,"lng":-94.583152},
+			{"lat":39.106228,"lng":-94.58337},
+			{"lat":39.10626,"lng":-94.583393},
+			{"lat":39.106892,"lng":-94.583708},
+			{"lat":39.107115,"lng":-94.583818},
+			{"lat":39.10716,"lng":-94.583833},
+			{"lat":39.10723,"lng":-94.583815},
+			{"lat":39.107295,"lng":-94.583837},
+			{"lat":39.108024,"lng":-94.58408},
+			{"lat":39.108509,"lng":-94.584237},
+			{"lat":39.108976,"lng":-94.584386},
+			{"lat":39.109578,"lng":-94.584579},
+			{"lat":39.109819,"lng":-94.583337},
+			{"lat":39.110055,"lng":-94.582141},
+			{"lat":39.11018,"lng":-94.581531},
+			{"lat":39.110204,"lng":-94.581418},
+			{"lat":39.110238,"lng":-94.58125},
+			{"lat":39.110301,"lng":-94.580965},
+			{"lat":39.110213,"lng":-94.580936},
+			{"lat":39.109679,"lng":-94.580759},
+			{"lat":39.108745,"lng":-94.580455},
+			{"lat":39.108519,"lng":-94.581651},
+			{"lat":39.108496,"lng":-94.581764},
+			{"lat":39.108283,"lng":-94.582801},
+			{"lat":39.108024,"lng":-94.58408}
+		],
+
+		[		// West South to North east
+			{"lat":39.096781,"lng":-94.583323},
+			{"lat":39.09700,"lng":-94.583309},
+			{"lat":39.097093,"lng":-94.583307},
+			{"lat":39.097184,"lng":-94.583304},
+			{"lat":39.09744,"lng":-94.583291},
+			{"lat":39.098288,"lng":-94.58325},
+			{"lat":39.098569,"lng":-94.583226},
+			{"lat":39.09967,"lng":-94.583181},
+			{"lat":39.099945,"lng":-94.58317},
+			{"lat":39.100767,"lng":-94.583109},
+			{"lat":39.101057,"lng":-94.583082},
+			{"lat":39.101657,"lng":-94.583045},
+			{"lat":39.101791,"lng":-94.583038},
+			{"lat":39.102275,"lng":-94.583008},
+			{"lat":39.102412,"lng":-94.583001},
+			{"lat":39.102823,"lng":-94.583038},
+			{"lat":39.103142,"lng":-94.583073},
+			{"lat":39.103416,"lng":-94.583104},
+			{"lat":39.103533,"lng":-94.583177},
+			{"lat":39.104472,"lng":-94.583155},
+			{"lat":39.104669,"lng":-94.583125},
+			{"lat":39.104855,"lng":-94.583108},
+			{"lat":39.105514,"lng":-94.583091}
+		],
+
+		[		// South to North
+			{"lat":39.095305,"lng":-94.583417},
+			{"lat":39.094732,"lng":-94.583434},
+			{"lat":39.094512,"lng":-94.58344},
+			{"lat":39.093412,"lng":-94.583494},
+			{"lat":39.094293,"lng":-94.583451},
+			{"lat":39.094512,"lng":-94.58344},
+			{"lat":39.095305,"lng":-94.583417},
+			{"lat":39.095742,"lng":-94.583391},
+			{"lat":39.095887,"lng":-94.583384},
+			{"lat":39.096038,"lng":-94.583377},
+			{"lat":39.096156,"lng":-94.583368},
+			{"lat":39.096339,"lng":-94.583345},
+			{"lat":39.096781,"lng":-94.583323},
+			{"lat":39.096836,"lng":-94.583319},
+			{"lat":39.097,"lng":-94.583309},
+			{"lat":39.097184,"lng":-94.583304}
+		],
+
+		[			// East to West
+			{"lat":39.093412,"lng":-94.583494},
+			{"lat":39.091744,"lng":-94.583574},
+			{"lat":39.090616,"lng":-94.583623},
+			{"lat":39.090397,"lng":-94.583632},
+			{"lat":39.089156,"lng":-94.583697}
+		],
+
+		[		// East South to West North
+			{"lat":39.091744,"lng":-94.583574},
+			{"lat":39.090397,"lng":-94.583632},
+			{"lat":39.090177,"lng":-94.583644},
+			{"lat":39.089156,"lng":-94.583697},
+			{"lat":39.089041,"lng":-94.583705},
+			{"lat":39.088356,"lng":-94.583739},
+			{"lat":39.087181,"lng":-94.583806},
+			{"lat":39.086891,"lng":-94.583824},
+			{"lat":39.086353,"lng":-94.583868},
+			{"lat":39.085948,"lng":-94.583898},
+			{"lat":39.085427,"lng":-94.583958},
+			{"lat":39.085098,"lng":-94.583978},
+			{"lat":39.084862,"lng":-94.583982},
+			{"lat":39.084708,"lng":-94.583992},
+			{"lat":39.084602,"lng":-94.584006},
+			{"lat":39.084618,"lng":-94.584004},
+			{"lat":39.084708,"lng":-94.583992}
+		],
+
+		[		// West South to North east
+			{"lat":39.102823,"lng":-94.583038},
+			{"lat":39.103325,"lng":-94.583094},
+			{"lat":39.103416,"lng":-94.583104},
+			{"lat":39.103528,"lng":-94.583004},
+			{"lat":39.104469,"lng":-94.582976},
+			{"lat":39.104689,"lng":-94.582968},
+			{"lat":39.105414,"lng":-94.582958},
+			{"lat":39.105505,"lng":-94.582957},
+			{"lat":39.105563,"lng":-94.582954},
+			{"lat":39.105701,"lng":-94.583008},
+			{"lat":39.106067,"lng":-94.583195},
+			{"lat":39.106231,"lng":-94.583282},
+			{"lat":39.106279,"lng":-94.583305},
+			{"lat":39.106329,"lng":-94.58333},
+			{"lat":39.106733,"lng":-94.583526},
+			{"lat":39.106887,"lng":-94.583609},
+			{"lat":39.107171,"lng":-94.583741},
+			{"lat":39.10723,"lng":-94.583815}
+		],
+
+		[	// West South to North east
+			{"lat":39.098569,"lng":-94.583226},
+			{"lat":39.099945,"lng":-94.58317},
+			{"lat":39.100035,"lng":-94.583163},
+			{"lat":39.100767,"lng":-94.583109}
+		]
+	];
+	var dracarys_markers = [];
+	var session = DragonTrack.Session({appserverIp:'http://localhost:9006'});
+
+		var dataObj ={
+			dracarys : '123456'
+		}
+		session.connect(dataObj);
+		session.addEventListener("session-dracarys", function (event) {
+			var data = event.data;
+			console.log("dracarys created Success ", data);
+			var pos = new google.maps.LatLng(data.lat, data.lon);
+			var index = data.car[data.car.length - 1];
+
+			if(dracarys_markers[index]!=null){
+				dracarys_markers[index].setMap(null);
+			}
+			dracarys_markers[index] = new google.maps.Marker({
+				position: pos
+			});
+			console.log(" dddd " , dracarys_markers[index]);
+			dracarys_markers[index].setMap(null);
+							var Infowindow = new google.maps.InfoWindow({
+				content: "80"+index
+			});
+			Infowindow.open(dracarys_map, dracarys_markers[index]);
+			dracarys_markers[index].setMap(dracarys_map);
+		});
+
+		session.addEventListener("error", function (event) {
+			console.log(" Found white walkers !", event);
+
+		});
+
+		session.addEventListener("session-disconnect", function (event) {
+			console.log(" Death by white walkers !", event);
+		});
+        var geolocate = new google.maps.LatLng(39.095, -94.583082);
+		var mapOptions = {
+			center: geolocate,
+			zoom: 15,
+			mapTypeId: google.maps.MapTypeId.ROAD,
+			disableDefaultUI: true
+		};
+
+		dracarys_map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+		var drawPolyline = function (dracarys_map, polyline){
+			var dracaryspath = new google.maps.Polyline({
+				path: polyline,
+				geodesic: true,
+				strokeColor: '#5453F9',
+				strokeOpacity: 1.0,
+				strokeWeight: 3
+			});
+			dracaryspath.setMap(dracarys_map);
+
+		}
+		for(var i=0;i<dracaryspolylines.length;i++){
+			drawPolyline(dracarys_map, dracaryspolylines[i]);
+		}
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=vinodh_6&callback=initMap">
+    </script>
+  </body>
+</html>
